@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class UserService {
-    private endpoint: string = 'http://127.0.0.1:5000/api/user/';
+    private endpoint: string = 'http://18.168.249.212/api/user/';
     constructor(private dataService: DataService) { }
     getAll(params?: any): Observable<any> {
       return this.dataService.get(this.endpoint, params).pipe<any[]>(tap((response: any) => {

@@ -7,7 +7,7 @@ import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class PortalService {
-  private repipeUrl: string = 'http://127.0.0.1:5000/api/user/';
+  private repipeUrl: string = 'http://18.168.249.212/api/user/';
     constructor(private dataService: DataService) { }
 
     register(body): Observable<boolean> {

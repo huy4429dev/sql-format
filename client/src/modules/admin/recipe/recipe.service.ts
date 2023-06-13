@@ -5,7 +5,7 @@ import { Observable, tap } from 'rxjs';
 @Injectable()
 export class RecipeService {
 
-  private repipeUrl: string = 'http://127.0.0.1:5000/api/recipe/';
+  private repipeUrl: string = 'http://18.168.249.212/api/recipe/';
   constructor(private dataService: DataService) { }
   getAll(params?: any): Observable<any> {
     return this.dataService.get(this.repipeUrl, params).pipe<any[]>(tap((response: any) => {

@@ -4,7 +4,7 @@ import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class TemplateService {
-  private repipeUrl: string = 'http://127.0.0.1:5000/api/template/';
+  private repipeUrl: string = 'http://18.168.249.212/api/template/';
   constructor(private dataService: DataService) { }
   getAll(params?: any): Observable<any> {
     return this.dataService.get(this.repipeUrl, params).pipe<any[]>(tap((response: any) => {
@@ -43,7 +43,7 @@ export class TemplateService {
       return response;
     }));
   }
-    
+
   getConnector(): Observable<any> {
     return this.dataService.get(this.repipeUrl + 'connector').pipe<any[]>(tap((response: any) => {
       return response;

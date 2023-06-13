@@ -1,0 +1,29 @@
+@mixin FlbMiddleAll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    height: 6px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #a1a1a1;
+  }
+}
+@mixin ResponsiveWidthTo1440 {
+  @media screen and (max-width: 1440px) {
+    width: var(--leftWidthFormAppbar1440);
+  }
+}
+
+@mixin fontSetup($color, $fontSize, $lineHeight, $fontStyle, $fontWeight) {
+  color: $color;
+  font-size: $fontSize;
+  line-height: $lineHeight;
+  font-style: $fontStyle;
+  font-weight: $fontWeight;
+}
