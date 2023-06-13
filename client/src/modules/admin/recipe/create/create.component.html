@@ -1,0 +1,68 @@
+<div class="container mt-3 ">
+  <nav aria-label="breadcrumb" class="rounded-3 bg-light nav-category">
+    <ol class="breadcrumb p-1 ">
+      <li class="breadcrumb-item"><a class="text-decoration-none" href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> <a class="text-decoration-none"
+          [routerLink]="'/admin/recipe'"> Recipe </a> </li>
+      <li class="breadcrumb-item " aria-current="page">Create Recipe</li>
+    </ol>
+  </nav>
+</div>
+<div class="container mt-4">
+  <h2 class="fw-bold">Create Recipe</h2>
+
+</div>
+<div class="container pb-5">
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label fw-bold">Name</label>
+      <input type="text" class="form-control" id="name" aria-describedby="nameHelp" formControlName="name">
+      <div *ngIf="recipeForm.get('name').invalid && (recipeForm.get('name').dirty || recipeForm.get('name').touched)"
+        class="alert alert-danger mt-2">
+        <div *ngIf="recipeForm.get('name').errors.required">
+          Name is required.
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label fw-bold">Description</label>
+      <input type="text" class="form-control" id="description" formControlName="description">
+      <div
+        *ngIf="recipeForm.get('description').invalid && (recipeForm.get('description').dirty || recipeForm.get('description').touched)"
+        class="alert alert-danger mt-2">
+        <div *ngIf="recipeForm.get('description').errors.required">
+          Description is required.
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="image" class="form-label fw-bold">Image URL</label>
+      <input type="text" class="form-control" id="image" formControlName="image">
+    </div>
+    <div class="mb-3">
+      <label for="version" class="form-label fw-bold">Version</label>
+      <input type="text" class="form-control" id="version" formControlName="version">
+      <div
+        *ngIf="recipeForm.get('version').invalid && (recipeForm.get('version').dirty || recipeForm.get('version').touched)"
+        class="alert alert-danger mt-2">
+        <div *ngIf="recipeForm.get('version').errors.required">
+          Version is required.
+        </div>
+      </div>
+    </div>
+    <!-- <div class="mb-3">
+      <label for="image" class="form-label fw-bold">Image</label>
+      <input type="file" class="form-control" id="image">
+    </div> -->
+    <div class="mb-3 row">
+      <label for="enabled" class="form-label fw-bold">Status</label>
+      <div class="col-sm-2">
+        <select class="form-select" aria-label="enabled" formControlName="enabled">
+          <option value=false>Disable</option>
+          <option value=true selected>Enable</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success-custom text-white" [disabled]="recipeForm.invalid">Save</button>
+  </form>
+</div>

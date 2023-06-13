@@ -1,0 +1,65 @@
+.example-menu {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 180px;
+  max-width: 280px;
+  background-color: rgba(255, 255, 255);
+  padding: 6px 0;
+  font-size: 12px !important;
+  box-shadow: 2px 1px 3px 1px #80808063;
+  border-radius: 3px;
+}
+
+.menu-count-item{
+  font-size: 12px;
+  margin-left: 14px;
+  color: gray;
+}
+
+.show-row{
+  font-size: 12px !important;
+  color: gray;
+}
+
+.example-menu-item,
+.example-standalone-trigger {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+
+  user-select: none;
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex: 1;
+}
+
+.example-standalone-trigger {
+  border:  1px solid gray;
+  margin-left: 20px;
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.example-menu-item:hover {
+  background-color: rgb(208, 208, 208);
+}
+
+.example-menu-item:active {
+  background-color: rgb(170, 170, 170);
+}
+
+.example-standalone-item {
+  background-color: rgb(239, 239, 239);
+}
+.example-standalone-item:hover {
+  background-color: rgb(208, 208, 208);
+}
+.example-standalone-item[aria-expanded='true'] {
+  background-color: rgb(208, 208, 208);
+}

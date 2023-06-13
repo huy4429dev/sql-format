@@ -1,0 +1,43 @@
+<div class="container mt-3">
+  <nav aria-label="breadcrumb" class="rounded-3 bg-light nav-category">
+      <ol class="breadcrumb p-1">
+          <li class="breadcrumb-item text-link"><a class="text-decoration-none" href="#">Home</a></li>
+          <li class="breadcrumb-item text-link" aria-current="page"><a class="text-decoration-none" routerLink="/admin/bridge">Bridge</a></li>
+          <li class="breadcrumb-item" aria-current="page">New</li>
+      </ol>
+  </nav>
+</div>
+<div class="container mt-4">
+  <h2 class="fw-bold">New Bridge</h2>
+  <button class="btn btn-outline-secondary mr-2" [routerLink]="'/admin/bridge'">Cancel</button>
+  <button style="margin-left: 6px;" class="btn text-white btn-success-custom" (click)="onSubmit()">Save</button>
+</div>
+<div class="container mt-4 pb-5">
+  <div class="mb-4 divider"></div>
+  <div class="row">
+      <div class="col-4 pe-5 border-end">
+          <p class="fw-bold tex-center">Recipe</p>
+          <select class="form-select" [(ngModel)]="selectedItem" placeholder="'select option'" (ngModelChange)="onOptionsSelected()">
+            <option *ngFor="let item of dataRecipe" [ngValue]="item.recipe_id">{{ item.name }}</option>
+        </select>
+      </div>
+      <div class="col-8 ps-5 text-center" *ngIf="selectedItem">
+          <p class="fw-bold">Template</p>
+          <table class=" mx-auto table table-bordered table-striped w-50">
+              <thead>
+                  <tr class="border-0">
+                      <th class="col-1 border-0">Filter</th>
+                      <th class="border"><input class="form-control" (keyup)="filter('name',$event)"/></th>
+                  </tr>
+              </thead>
+              <tbody *ngFor="let item of dataTemplate">
+                  <tr>
+                      <td><input class="form-check-input" type="checkbox" [checked]="isTemplateSelected(item.template_id)" [value]="item.template_id"(change)="onCheckboxChange(item.template_id, $event.target.checked)"></td>
+                      <td>{{ item.name }}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+
+</div>

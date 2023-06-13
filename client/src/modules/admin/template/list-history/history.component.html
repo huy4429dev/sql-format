@@ -1,0 +1,49 @@
+<div class="modal fade show" style="display: block" tabindex="-1" role="dialog"
+  style="display: flex; align-items: center; justify-content: center;">
+  <div class="modal-content" style="width: 72%;">
+    <div class="modal-header">
+      <h5 class="modal-title h4" id="mySmallModalLabel">Log</h5>
+      <button (click)="closeModal()" type="button" class="btn btn-xs btn-icon btn-ghost-secondary" data-dismiss="modal"
+        aria-label="Close">
+        <i class="tio-clear tio-lg"></i>
+      </button>
+    </div>
+    <div class="container pb-5">
+      <div class="table-responsive scroll-bar">
+        <table class="table table-striped table-hover table-bordered table-default" data-bs-spy="scroll">
+          <thead>
+            <tr>
+              <th scope="col" colspan="1">#</th>
+              <th class="col-title text-center" scope="col" colspan="4">log_id</th>
+              <th class="col-title text-center name" scope="col" colspan="1">action</th>
+              <th class="col-title text-center" scope="col" colspan="4">created_at</th>
+              <th class="col-title text-center" scope="col" colspan="4">created_by</th>
+              <th class="col-title text-center" scope="col" colspan="4">updated_at</th>
+              <th class="col-title text-center" scope="col" colspan="4">updated_by</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let item of data; let i = index;">
+              <td scope="col" colspan="1">{{i+1}}</td>
+              <td scope="col" colspan="4">{{item.log_id}}</td>
+              <td scope="col" colspan="1">{{item.action}}</td>
+              <td scope="col" colspan="4">{{item.created_at}}</td>
+              <td scope="col" colspan="4">{{item.email_created_by}}</td>
+              <td scope="col" colspan="4">{{item.updated_at}}</td>
+              <td scope="col" colspan="4">{{item.email_updated_by}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-sm btn-white" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+      <ng-template #notHandle>
+        <button disabled type="button" class="btn btn-sm btn-warning btn-loader">
+          <span class="loader"></span>
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>

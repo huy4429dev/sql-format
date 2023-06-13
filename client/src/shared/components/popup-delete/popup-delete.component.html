@@ -1,0 +1,32 @@
+<div  (click)="closeModal()" class="modal fade bd-example-modal-sm show" style="display: block" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div  (click)="$event.stopPropagation()" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title h4" id="mySmallModalLabel">Delete action</h5>
+        <button (click)="closeModal()" type="button" class="btn btn-xs btn-icon btn-ghost-secondary" data-dismiss="modal" aria-label="Close">
+          <i class="tio-clear tio-lg"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        Do you want to take action?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-white" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+        <ng-container *ngIf="!isHandling; else notHandle">
+          <button
+            type="submit"
+            class="btn btn-sm btn-warning"
+            (click)="handleSave()"
+          >
+            Save
+          </button>
+        </ng-container>
+        <ng-template #notHandle>
+          <button disabled type="button" class="btn btn-sm btn-warning btn-loader"  >
+            <span class="loader"></span>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

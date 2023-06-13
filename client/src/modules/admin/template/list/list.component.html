@@ -1,0 +1,161 @@
+<div class="container mt-3  bg-light rounded-3">
+    <nav aria-label="breadcrumb bg-light">
+        <ol class="breadcrumb p-1 ">
+            <li class="breadcrumb-item"><a class="text-decoration-none" href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Template</li>
+        </ol>
+    </nav>
+</div>
+<div class="container mt-4">
+    <h2 class="fw-bold">Template</h2>
+    <button *ngIf="isActiveAdmin" class="btn btn-green text-white mb-4" [routerLink]="'create'">
+        Create Template
+    </button>
+    <button (click)="this.popupState.bulkDelete = true" *ngIf="isActiveAdmin && hasItemDelete" class="btn btn-danger text-white mb-4" style="margin-left: 8px">
+      Delete Recipes
+    </button>
+</div>
+<div class="container pb-5">
+    <div style="overflow-x: scroll;">
+        <table class="table table-striped table-hover table-bordered" data-bs-spy="scroll" style="width: 2000px;">
+            <thead>
+                <tr>
+                    <th colspan="1">#</th>
+                    <th class="text-primary text-center">template_id</th>
+                    <th class="text-primary text-center">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span>
+                                name
+                            </span>
+                            <div>
+                                <div class="arrow" (click)="sort('name','asc')"></div>
+                                <div class="arrow arrow-down" (click)="sort('name','desc')"></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="text-primary text-center">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span>
+                                warehouse_type
+                            </span>
+                            <div>
+                                <div class="arrow" (click)="sort('warehouse_type','asc')"></div>
+                                <div class="arrow arrow-down" (click)="sort('warehouse_type','desc')"></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="text-primary text-center">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span>
+                                version
+                            </span>
+                            <div>
+                                <div class="arrow" (click)="sort('version','asc')"></div>
+                                <div class="arrow arrow-down" (click)="sort('version','desc')"></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="text-primary text-center">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span>
+                                created_at
+                            </span>
+                            <div>
+                                <div class="arrow" (click)="sort('created_at','asc')"></div>
+                                <div class="arrow arrow-down" (click)="sort('created_at','desc')"></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th class="text-primary text-center">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <span>
+                                updated_at
+                            </span>
+                            <div>
+                                <div class="arrow" (click)="sort('updated_at','asc')"></div>
+                                <div class="arrow arrow-down" (click)="sort('updated_at','desc')"></div>
+                            </div>
+                        </div>
+                    </th>
+                    <th *ngIf="isActiveAdmin" class="text-primary text-center fixed" scope="col" colspan="2">action</th>
+                </tr>
+                <tr>
+                    <th colspan="1"><input [checked]="isCheckAllItem" (change)="checkAllItem($event)" class="form-check-input"
+                        type="checkbox"></th>
+                    <th><input class="form-control" (keyup)="filter('template_id',$event)" />
+                    </th>
+                    <th><input class="form-control" (keyup)="filter('name',$event)" /></th>
+                    <th><input class="form-control" (keyup)="filter('warehouse_type',$event)" />
+                    </th>
+                    <th><input class="form-control" (keyup)="filter('version',$event)" /></th>
+                    <th colspan="2" class="" *ngIf="isActiveAdmin">
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                    *ngFor="let item of data  | paginate: { itemsPerPage: config.itemsPerPage, currentPage: p, totalItems: config.totalItems}; let i = index;">
+                    <td colspan="1">
+                        <input [checked]="item.checked" (change)="checkItem($event,i)" class="form-check-input" type="checkbox">
+                      </td>
+                    <td style="white-space:nowrap;">{{item.template_id}}</td>
+                    <td style="white-space:nowrap;">{{item.name}}</td>
+                    <td style="white-space:nowrap;">{{item.warehouse_type}}</td>
+                    <td style="white-space:nowrap;">{{item.version}}</td>
+                    <td style="white-space:nowrap;">{{item.created_at}}</td>
+                    <td style="white-space:nowrap;" scope="col" colspan="4">
+                        {{item.updated_at}}</td>
+                    <td scope="col" colspan="2" *ngIf="isActiveAdmin">hiddencolumns</td>
+                    <td class="fixed d-flex justify-content-between align-item-center" scope="col" colspan="2" *ngIf="isActiveAdmin">
+                        <button class="p-0 mx-2 btn btn-link" (click)="handleHistory(item)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-clock-history" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 4.5a.5.5 0 0 1 .5.5V8l2.93 1.93a.5.5 0 0 1-.16.84L8 10.16l-2.27 1.27a.5.5 0 0 1-.84-.16L6 8.5V5a.5.5 0 0 1 .5-.5z" />
+                                <path
+                                    d="M8 0a8 8 0 1 0 8 8A8 8 0 0 0 8 0zm4.5 9a.5.5 0 0 1-.5.5H8.5a.5.5 0 0 1-.5-.5V3a.5.5 0 0 1 1 0v5.5h3a.5.5 0 0 1 .5.5z" />
+                            </svg>
+                        </button>
+                        <button class="p-0 mx-2 btn btn-link" (click)="handleEdit(item)">
+                            <svg color="#2F80ED" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                <path
+                                    d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z" />
+                            </svg>
+                        </button>
+                        <button class="p-0 btn btn-link" (click)="handleDelete(item)">
+                            <svg color="#2F80ED" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                <path
+                                    d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex align-items-center" style="gap: 10">
+      <app-menu-pagination
+        [model]="{total: config?.totalItems, count:data?.length}"
+        (onOk)="this.setPageSize($event)">
+      </app-menu-pagination>
+      <pagination-controls (pageChange)="p = $event" (pageChange)="pageChanged($event)">
+      </pagination-controls>
+    </div>
+</div>
+
+<app-template-history-item *ngIf="popupState.history" [model]="itemHandle" (onOk)="okDelete()"
+    (onClose)="popupState.history = false">
+</app-template-history-item>
+<app-template-edit-item *ngIf="popupState.edit" [model]="itemHandle" (onOk)="okDelete()"
+    (onClose)="popupState.edit = false">
+</app-template-edit-item>
+
+<app-popup-delete *ngIf="popupState.delete" [isHandling]="popupState.isHandling" (onOk)="okDelete()"
+    (onClose)="popupState.delete = false">
+</app-popup-delete>
+
+<app-popup-delete *ngIf="popupState.bulkDelete" [isHandling]="false" (onOk)="okBulkDelete()"
+  (onClose)="popupState.bulkDelete = false">
+</app-popup-delete>

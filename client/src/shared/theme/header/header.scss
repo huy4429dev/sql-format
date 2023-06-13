@@ -1,0 +1,16 @@
+@import 'src/styles/variables';
+
+.esh-header {
+    $header-height: 4rem;
+
+    background-color: $color-primary;
+    height: $header-height;
+
+    &-back {
+        text-decoration: none;
+        text-transform: uppercase;
+
+        &:hover {
+        }
+    }
+}

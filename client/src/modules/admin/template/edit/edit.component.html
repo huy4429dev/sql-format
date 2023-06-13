@@ -1,0 +1,115 @@
+<div (click)="closeModal()"  class="modal fade show" style="display: block" tabindex="-1" role="dialog"
+  style="display: flex; align-items: center; justify-content: center;z-index:500;">
+  <div (click)="$event.stopPropagation()" class="modal-content" style="width: 72%;">
+    <div class="modal-header">
+      <h5 class="modal-title h4" id="mySmallModalLabel">Update action</h5>
+      <button (click)="closeModal()" type="button" class="btn btn-xs btn-icon btn-ghost-secondary" data-dismiss="modal"
+        aria-label="Close">
+        <i class="tio-clear tio-lg"></i>
+      </button>
+    </div>
+    <div class="modal-body" style="height: 80vh; overflow: auto;">
+      <div class="container pb-5">
+        <form [formGroup]="templateForm">
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label for="name" class="form-label fw-bold">Name</label>
+              <input type="text" class="form-control" id="name" aria-describedby="nameHelp" formControlName="name">
+              <div
+                *ngIf="templateForm.get('name').invalid && (templateForm.get('name').dirty || templateForm.get('name').touched)"
+                class="alert alert-danger mt-2">
+                <div *ngIf="templateForm.get('name').errors.required">
+                  Name is required.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="version" class="form-label fw-bold">Version</label>
+              <input type="text" class="form-control" id="version" formControlName="version">
+              <div
+                *ngIf="templateForm.get('version').invalid && (templateForm.get('version').dirty || templateForm.get('version').touched)"
+                class="alert alert-danger mt-2">
+                <div *ngIf="templateForm.get('version').errors.required">
+                  Version is required.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="warehouse_type" class="form-label fw-bold">Warehouse Type</label>
+              <input type="text" class="form-control" list="warehouse_types" placeholder="warehouse type here"
+                formControlName="warehouse_type" [(ngModel)]="typeValue" (change)="saveType($event)">
+              <datalist id="warehouse_types">
+                <option *ngFor="let item of dataType" [value]="item?.warehouse_type">{{item?.role}}</option>
+              </datalist>
+            </div>
+            <div class="mb-3">
+              <label for="source_type" class="form-label fw-bold">Source Type</label>
+              <select  class="form-select" aria-label="source_type" [(ngModel)]='ngSourceType' formControlName="source_type"  (change)="onSourceTypeChange($event.target.value)">
+                <option *ngFor="let item of data" [value]="item.id" [selected]="item.id === selectedSourceType">{{item.name}}</option>
+              </select>
+
+            </div>
+            <div class="mb-3">
+              <label for="report_type" class="form-label fw-bold">Report Type</label>
+              <select  class="form-select" aria-label="report_type" [(ngModel)]='ngReportType' formControlName="report_type">
+                <option *ngFor="let item of ReportTypes" [value]="item.value" selected>{{item.value}}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="source_platform_type" class="form-label fw-bold">Source Platform Type</label>
+              <input type="text" class="form-control" list="source_platform_type" placeholder="source platform type here"
+                formControlName="source_platform_type" [(ngModel)]="typeSourcePlatformValue" (change)="saveType($event)">
+              <datalist id="source_platform_type">
+                <option *ngFor="let item of dataSourcePlatformType" [value]="item?.source_platform_type">{{item?.role}}</option>
+              </datalist>
+            </div>
+            <!-- <div class="mb-3 col-xxl-1 col-md-2 col-sm-3">
+              <label for="enabled" class="form-label fw-bold">Status</label>
+              <select class="form-select" [(ngModel)]='ngSelect' aria-label="enabled" formControlName="enabled">
+                <option value=false>Disable</option>
+                <option value=true>Enable</option>
+              </select>
+            </div> -->
+            <div class="mb-4 divider"></div>
+            <div class="row">
+              <div class="col-xl-8 border-end pe-4">
+                <p class="m-0 fw-bold text-center">SQL Template</p>
+                <div class="d-flex" style="gap: 10px;">
+                  <button class="btn btn-warning text-white my-4" (click)="format()">Format SQL</button>
+                  <app-template-dropdown
+                    (onClean)="clean()"
+                    (onSubentity)="subentity()"
+                  ></app-template-dropdown>
+                </div>
+                <ngx-monaco-editor [(ngModel)]="query" formControlName="sql_template" style="height: 410px;" id="sql_text"
+                  [options]="editorOptions"
+                  (ngModelChange)="queryChange($event)">
+                </ngx-monaco-editor>
+              </div>
+              <div class="col-xl-4 ps-4">
+                <p class="m-0 fw-bold text-center">Definition</p>
+                <button class="btn btn-primary  my-4" (click)="clickGenerateDefine()">Generate Definition</button>
+                <ngx-monaco-editor [(ngModel)]="jsonGenerate" formControlName="definition" style="height: 410px;" id="sql_text"
+                  [options]="editorOptionsJson">
+                </ngx-monaco-editor>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-white" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+        <ng-container *ngIf="!isHandling; else notHandle">
+          <button type="submit" class="btn btn-sm btn-warning" (click)="handleSubmit()">
+            Save
+          </button>
+        </ng-container>
+        <ng-template #notHandle>
+          <button disabled type="button" class="btn btn-sm btn-warning btn-loader">
+            <span class="loader"></span>
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

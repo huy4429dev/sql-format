@@ -1,0 +1,163 @@
+@import 'variables';
+@import "@angular/cdk/overlay-prebuilt.css";
+
+:root {
+  --bg-theme-editor : #1C2130;
+  --blue-title-col : #337AB7;
+  --blue-category : #4BA2E1;
+  --blue-icon-action : #2F80ED;
+  --primary-custom-text:#31708F;
+  --primary-custom-btn : #0275D8;
+  --success-custom-btn : #5CB85C;
+}
+
+/* Customize website's scrollbar like Mac OS
+Not supports in Firefox and IE */
+
+/* total width */
+body::-webkit-scrollbar {
+  background-color: #fff;
+  width: 16px;
+}
+
+/* background of the scrollbar except button or resizer */
+body::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+/* scrollbar itself */
+body::-webkit-scrollbar-thumb {
+  background-color: #babac0;
+  border-radius: 16px;
+  border: 4px solid #fff;
+}
+
+/* set button(top and bottom of the scrollbar) */
+body::-webkit-scrollbar-button {
+  display:none;
+}
+
+html, body, form, fieldset, table, tr, td, img, input, button, select, textarea, optgroup, option {
+  font-family: 'Poppins', sans-serif;
+}
+
+// * {
+//   font-family: 'Poppins', sans-serif;
+// }
+.btn-primary-custom {
+    background-color: var(--primary-custom-btn);
+}
+.btn-success-custom {
+    background-color: var(--success-custom-btn);
+}
+.bg-theme {
+  background-color: var(--bg-theme-editor);
+}
+.col-title {
+  color: var(--blue-title-col);
+}
+.icon-action {
+  color: var(--blue-icon-action);
+}
+.text-link {
+  color: var(--primary-custom-btn);
+}
+
+.text-primary-custom {
+  color: var(--primary-custom-text);
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background: #f9f9f9;
+}
+.btn-green {
+  border: 1px solid #4cae4c;
+  background: #5cb85c;
+}
+.nav-category {
+  height: 36px;
+}
+.text-active {
+  color: #09d99b !important;
+
+}
+.table-default {
+  min-width: 1140px;
+  max-height: 473px;
+}
+.page-link {
+  color: var(--primary-custom-btn);
+}
+
+/* BRIDGE PAGE */
+.active-bridge {
+  color: #4BA2E1 !important;
+}
+.divider {
+  background: #EEEEEE;
+  height: 1px;
+}
+
+.container-textarea {
+  height: 340px;
+  overflow-y: scroll;
+}
+.container-textarea-table {
+  height: 214px;
+  width: 490px;
+  overflow-y: scroll;
+}
+.container-textarea::-webkit-scrollbar {
+  width: 10px;
+  background-color: #424242;
+}
+.container-textarea::-webkit-scrollbar-thumb {
+  background-color: #686868;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.td-action {
+  height: 100%;
+  display: flex;
+}
+
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid gray;
+  cursor: pointer;
+  &:hover{
+    border-bottom: 5px solid black;
+  }
+}
+.arrow-down {
+  transform: rotate(180deg);
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.container{
+  position: relative;
+}
+
+
+.fixed {
+  position: absolute;
+  right: 1px;
+  width: 153px;
+  height: 41px;
+  background: white !important;
+  box-shadow: 1px 1px 3px 1px #08060629 !important;
+}
+
+.ngx-pagination{
+  margin-top: 20px;
+  font-size: 13px;
+}
+.ngx-pagination .current{
+  padding: 2px 8px !important;
+  border-radius: 5px
+}

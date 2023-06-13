@@ -1,0 +1,38 @@
+<header style="background-color: #180A34;">
+  <nav class="container navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand text-white fs-5" href="/"><img src="https://app.dev.kleene.ai/img/branding/logo-large-2022.svg" width="100" height="25"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 m-0" style="margin : 0 !important">
+          <li class="nav-item">
+            <a class="nav-link text-white" aria-current="page" [routerLink]="'/admin/recipe'" routerLinkActive="text-active">Recipe</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" [routerLink]="'/admin/template'" routerLinkActive="text-active">Template</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" [routerLink]="'/admin/bridge'" routerLinkActive="text-active">Bridge</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 m-0" style="margin : 0 !important">
+          <li class="nav-item">
+            <a class="nav-link text-white" aria-current="page" [routerLink]="'/'" >Home</a>
+          </li>
+          <li class="nav-item" *ngIf="isActiveAdmin">
+            <a class="nav-link text-white" [routerLink]="'/admin/user'" routerLinkActive="text-active">User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" style="cursor: pointer;" (click)="logout()">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" [routerLink]="'/docs'" routerLinkActive="text-active">Docs</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

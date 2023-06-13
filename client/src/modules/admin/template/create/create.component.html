@@ -1,0 +1,123 @@
+<div class="container mt-3  bg-light rounded-3">
+  <nav aria-label="breadcrumb bg-light">
+    <ol class="breadcrumb p-1 ">
+      <li class="breadcrumb-item"><a class="text-decoration-none" routerLink="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a class="text-decoration-none"
+          routerLink="/admin/template">Template</a></li>
+      <li class="breadcrumb-item " aria-current="page">Create</li>
+    </ol>
+  </nav>
+</div>
+<div class="container mt-4">
+  <h2 class="fw-bold">Create Template</h2>
+  <button class="btn btn-outline-secondary" routerLink="/admin/template">Cancel</button>
+  <button (click)="onSubmit()" class="btn text-white btn-success-custom" style="margin-left: 6px;"
+    [disabled]="templateForm.invalid">Save</button>
+</div>
+<div class="container mt-4 pb-5">
+  <div class="mb-4 divider"></div>
+  <form [formGroup]="templateForm">
+    <div class="mb-3 row">
+      <label for="name" class="col-sm-2 col-form-label text-end">Name</label>
+      <div class="col-sm-9">
+        <input type="text" placeholder="name here" class="form-control" id="name" value="" formControlName="name">
+        <div
+          *ngIf="templateForm.get('name').invalid && (templateForm.get('name').dirty || templateForm.get('name').touched)"
+          class="alert alert-danger mt-2">
+          <div *ngIf="templateForm.get('name').errors.required">
+            Name is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-4 row">
+      <label for="version" class="col-sm-2 col-form-label text-end">Version</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="version" placeholder="version here" formControlName="version">
+        <div
+          *ngIf="templateForm.get('version').invalid && (templateForm.get('version').dirty || templateForm.get('version').touched)"
+          class="alert alert-danger mt-2">
+          <div *ngIf="templateForm.get('version').errors.required">
+            Version is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-4 row">
+      <label for="warehouse_type" class="col-sm-2 col-form-label text-end">Warehouse Type</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" list="warehouse_types" placeholder="warehouse type here"
+          formControlName="warehouse_type" [(ngModel)]="typeValue" (change)="saveType($event)">
+        <datalist id="warehouse_types">
+          <option *ngFor="let item of dataType" [value]="item?.warehouse_type">{{item?.role}}</option>
+        </datalist>
+      </div>
+    </div>
+    <div class="mb-4 row">
+      <label for="source_type" class="col-sm-2 col-form-label text-end">Source Type</label>
+      <div class="col-sm-9">
+        <select class="form-select" aria-label="source_type" formControlName="source_type"
+          (change)="onSourceTypeChange($event.target.value)">
+          <option *ngFor="let item of data" [value]="item" [value]="item.id"
+            [selected]="item.id === selectedSourceType">{{item.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="mb-4 row">
+      <label for="report_type" class="col-sm-2 col-form-label text-end">Report Type</label>
+      <div class="col-sm-9">
+        <select class="form-select" aria-label="report_type" formControlName="report_type">
+          <option *ngFor="let item of ReportTypes" [value]="item.value" selected>{{item.value}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="mb-4 row">
+      <label for="source_platform_type" class="col-sm-2 col-form-label text-end">Source Platform Type</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" list="source_platform_type" placeholder="Source Platform type here"
+          formControlName="source_platform_type" [(ngModel)]="typeSourcePlatformValue"
+          (change)="saveSourcePlatformType($event)">
+        <datalist id="source_platform_type">
+          <option *ngFor="let item of dataSourcePlatformType" [value]="item?.source_platform_type">{{item?.role}}
+          </option>
+        </datalist>
+      </div>
+    </div>
+    <!-- <div class="mb-4 row">
+      <label for="version" class="col-sm-2 col-form-label text-end">Status</label>
+      <div class="mb-3 col-xxl-1 col-md-2 col-sm-3">
+        <select class="form-select" aria-label="enabled" formControlName="enabled">
+          <option value=false>Disable</option>
+          <option value=true selected>Enable</option>
+        </select>
+      </div>
+    </div> -->
+
+  </form>
+  <div class="mb-4 divider"></div>
+  <div class="row">
+    <div class="col-xl-8 border-end pe-4">
+      <p class="m-0 fw-bold text-center">SQL Template</p>
+      <div class="d-flex">
+        <button class="btn btn-warning text-white my-4" (click)="format()" style="margin-right:8px">Format SQL</button>
+        <app-template-dropdown
+          (onClean)="clean()"
+          (onSubentity)="subentity()"
+        ></app-template-dropdown>
+      </div>
+      <ngx-monaco-editor
+        [(ngModel)]="query" style="height: 410px;width:100%;" id="sql_text"
+        [options]="editorOptions"
+        (ngModelChange)="queryChange($event)"
+        >
+      </ngx-monaco-editor>
+    </div>
+    <div class="col-xl-4 ps-4">
+      <p class="m-0 fw-bold text-center">Definition</p>
+      <button class="btn btn-primary  my-4" (click)="clickGenerateDefine()">Generate Definition</button>
+      <ngx-monaco-editor [(ngModel)]="jsonGenerate" style="height: 410px;" id="sql_text" [options]="editorOptionsJson1">
+      </ngx-monaco-editor>
+    </div>
+  </div>
+
+</div>

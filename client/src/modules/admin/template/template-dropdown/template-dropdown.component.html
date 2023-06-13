@@ -1,0 +1,8 @@
+<button [cdkMenuTriggerFor]="menu" class="btn btn-secondary text-white my-4">Template</button>
+
+<ng-template #menu>
+  <div class="example-menu" cdkMenu>
+    <button (click)="onClean.emit(true)" class="example-menu-item" cdkMenuItem>Clean</button>
+    <button (click)="onSubentity.emit(true)" class="example-menu-item" cdkMenuItem>Subentity</button>
+  </div>
+</ng-template>

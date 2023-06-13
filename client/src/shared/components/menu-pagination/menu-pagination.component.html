@@ -1,0 +1,15 @@
+<div class="d-flex align-items-center show-row">
+  <span>Show rows</span>
+  <button [cdkMenuTriggerFor]="menu" class="example-standalone-trigger">
+     <span style="margin-right: 18px;"> {{itemSelected}}</span>
+     <img width="14px" src="https://upload.wikimedia.org/wikipedia/commons/c/c7/Antu-go-down-24.svg" alt="">
+  </button>
+  <span class="menu-count-item">1 - {{model?.count}} of {{model?.total}}</span>
+</div>
+
+
+<ng-template #menu>
+  <div class="example-menu" cdkMenu>
+    <button (click)="selectItem(item)" *ngFor="let item of items" class="example-menu-item" cdkMenuItem>{{item}}</button>
+  </div>
+</ng-template>

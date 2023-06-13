@@ -1,0 +1,97 @@
+<div class="container mt-3  bg-light rounded-3">
+    <nav aria-label="breadcrumb bg-light">
+        <ol class="breadcrumb p-1 ">
+            <li class="breadcrumb-item"><a class="text-decoration-none" href="#">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Manage Users</li>
+        </ol>
+    </nav>
+</div>
+<div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link " id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button"
+                role="tab" aria-controls="users" aria-selected="true" [routerLink]="'/admin/user'">Users</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="create-tab" data-bs-toggle="tab" data-bs-target="#create" type="button"
+                role="tab" aria-controls="create" aria-selected="false">Create</button>
+        </li>
+    </ul>
+    <div class="tab-pane" id="create" role="tabpanel" aria-labelledby="create-tab">
+        <div class="row mt-4 gx-3">
+            <div class="col-xl-3  col-sm-6">
+                <div class="p-2 text-center border"><button
+                        class="btn btn-primary-custom btn-lg text-white w-100">Account
+                        Information</button>
+                </div>
+            </div>
+
+            <div class="col-xl-9  col-sm-6">
+                <form [formGroup]="userForm">
+                    <div class="p-4 border">
+                        <p *ngIf="isSuccess" class="text-center text-primary-custom">Account has been sucessfully
+                            created. Please copy
+                            the credentials below and send to the user</p>
+                        <div class="mb-3 row">
+                            <label for="email" class="col-sm-3 col-form-label text-end">Email</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="email" value="" formControlName="email">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="password" class="col-sm-3 col-form-label text-end">Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="password" value=""
+                                    formControlName="password">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="role" class="col-sm-3 col-form-label text-end">Role</label>
+                            <div class="col-sm-2">
+                                <input class="form-control" type="text" list="roles" formControlName="role" [(ngModel)]="roleValue"
+                                    (change)="saveRoles($event)">
+                                <datalist id="roles">
+                                    <option *ngFor="let item of dataUser" [value]="item?.role">{{item?.role}}</option>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="status" class="col-sm-3 col-form-label text-end">Status</label>
+                            <div class="col-sm-2">
+                                <select class="form-select" aria-label="status" formControlName="status">
+                                    <option value="0" selected>Active</option>
+                                    <option value="1">Block</option>
+                                    <option value="2">Waiting</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="status_admin" class="col-sm-3 col-form-label text-end">Admin Status</label>
+                            <div class="col-sm-2">
+                                <select class="form-select" aria-label="status_admin" formControlName="status_admin">
+                                    <option value=false>No</option>
+                                    <option value=true selected>Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4 px-4">
+                        <div class="col-3"></div>
+                        <div class="col-9 ">
+                            <button class="w-100 btn btn-success-custom text-white" (click)="onSubmit()">Save</button>
+                        </div>
+                    </div>
+                    <div *ngIf="showEmail" class="row mt-4 px-4">
+                        <div class="col-3"></div>
+                        <div class="col-9 ">
+                            <div
+                                [style]=" 'padding:15px;width:300px;background: #fff; border: 1px solid #dcdcdc;color:#b66a6a;' ">
+                                <p>Email: {{email}}</p>
+                                <p>Password: {{password}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

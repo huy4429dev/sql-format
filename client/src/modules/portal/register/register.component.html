@@ -1,0 +1,62 @@
+<div class="container mt-3  bg-light rounded-3">
+  <nav aria-label="breadcrumb bg-light">
+    <ol class="breadcrumb p-1 ">
+      <li class="breadcrumb-item"><a class="text-decoration-none" href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Register</li>
+    </ol>
+  </nav>
+</div>
+<div class="container">
+  <form class="d-flex justify-content-center" [formGroup]="fromGroup" (ngSubmit)="onSubmit()">
+    <!-- <div class="w-100"> -->
+    <div class="card w-25" style="width: 18rem;">
+      <div class="card-header">
+        Sign up
+      </div>
+      <div class="p-3">
+        <div class="mb-3">
+          <label for="exampleInputEmail" class="form-label fw-bold">Email</label>
+          <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1"
+            aria-describedby="emailHelp">
+          <div
+            *ngIf="fromGroup.get('email').invalid && (fromGroup.get('email').dirty || fromGroup.get('email').touched)"
+            class="alert alert-danger mt-2">
+            <div *ngIf="fromGroup.get('email').errors.email">
+              Email invalid.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword" class="form-label fw-bold">Password</label>
+          <input formControlName="password" type="password" class="form-control" id="exampleInputPassword">
+          <div
+            *ngIf="fromGroup.get('password').invalid && (fromGroup.get('password').dirty || fromGroup.get('password').touched)"
+            class="alert alert-danger mt-2">
+            <div *ngIf="fromGroup.get('password').errors.required">
+              Password is required.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="role" class="form-label fw-bold">Role</label>
+            <div class="col mb-3">
+                <input type="text" list="roles"  class="form-control" formControlName="role" [(ngModel)]="roleValue"
+                    (change)="saveRoles($event)">
+                <datalist id="roles">
+                    <option *ngFor="let item of dataUser" [value]="item?.role">{{item?.role}}</option>
+                </datalist>
+            </div>
+        </div>
+
+        <button [disabled]="fromGroup.invalid" type="submit" class="btn btn btn-primary w-100">Sign up</button>
+      </div>
+    </div>
+
+    <!-- </div> -->
+  </form>
+  <div class="d-flex justify-content-center">
+    <div class="w-25 text-center m-3 px-3">
+      <a href="/login" class="text-decoration-none">Already registered? Sign in!</a>
+    </div>
+  </div>
+</div>

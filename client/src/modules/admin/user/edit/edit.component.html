@@ -1,0 +1,72 @@
+<div (click)="closeModal()" class="modal fade show" style="display: block" tabindex="-1" role="dialog"
+  style="display: flex; align-items: center; justify-content: center;">
+  <div (click)="$event.stopPropagation()"  class="modal-content" style="width: 72%;">
+    <div class="modal-header">
+      <h5 class="modal-title h4" id="mySmallModalLabel">Update action</h5>
+      <button (click)="closeModal()" type="button" class="btn btn-xs btn-icon btn-ghost-secondary" data-dismiss="modal"
+        aria-label="Close">
+        <i class="tio-clear tio-lg"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="container pb-5">
+        <form [formGroup]="userForm">
+          <div class="mb-3">
+            <label for="email" class="form-label fw-bold">Email</label>
+            <input type="text" class="form-control" id="email" formControlName="email">
+            <div *ngIf="userForm.get('email').invalid && (userForm.get('email').dirty || userForm.get('email').touched)"
+              class="alert alert-danger mt-2">
+              <div *ngIf="userForm.get('email').errors.required">
+                Email is required.
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+              <label for="password" class="form-label fw-bold">Password</label>
+              <div class="col-sm-9">
+                  <input type="password" class="form-control" id="password" formControlName="password">
+              </div>
+          </div>
+          <div class="mb-3 col-xxl-1 col-md-2 col-sm-3">
+            <label for="role" class="form-label fw-bold">Role</label>
+            <div class="col-sm-2">
+              <input style="width: 133px;" class="form-control" type="text" list="roles" formControlName="role" [(ngModel)]="roleValue"
+                (change)="saveRoles($event)">
+              <datalist id="roles">
+                <option *ngFor="let item of dataUser" [value]="item?.role">{{item?.role}}</option>
+              </datalist>
+            </div>
+          </div>
+          <div class="mb-3 " style="width: 133px;">
+            <label for="status" class="form-label fw-bold">Status</label>
+            <select class="form-select" [(ngModel)]='ngSelectStatus' aria-label="status" formControlName="status">
+              <option value=0>Active</option>
+              <option value=1>Block</option>
+              <option value=2>Waiting</option>
+            </select>
+          </div>
+          <div class="mb-3 " style="width: 133px;">
+            <label for="status_admin" class="form-label fw-bold">Admin Status</label>
+              <select class="form-select" [(ngModel)]='ngSelectAdminStatus' aria-label="status_admin" formControlName="status_admin">
+                <option value=false>No</option>
+                <option value=true>Yes</option>
+              </select>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-sm btn-white" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+      <ng-container *ngIf="!isHandling; else notHandle">
+        <button type="submit" class="btn btn-sm btn-warning" (click)="handleSubmit()">
+          Save
+        </button>
+      </ng-container>
+      <ng-template #notHandle>
+        <button disabled type="button" class="btn btn-sm btn-warning btn-loader">
+          <span class="loader"></span>
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<div (click)="closeModal()" class="modal fade show" style="display: block" tabindex="-1" role="dialog"
+  style="display: flex; align-items: center; justify-content: center;">
+  <div (click)="$event.stopPropagation()" class="modal-content" style="width: 72%;">
+    <div class="modal-header">
+      <h5 class="modal-title h4" id="mySmallModalLabel">Update action</h5>
+      <button (click)="closeModal()" type="button" class="btn btn-xs btn-icon btn-ghost-secondary" data-dismiss="modal"
+        aria-label="Close">
+        <i class="tio-clear tio-lg"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="container pb-5">
+        <form [formGroup]="recipeForm">
+          <div class="row">
+            <div class="mb-3 col-6">
+              <label for="name" class="form-label fw-bold">Name</label>
+              <input type="text" class="form-control" id="name" aria-describedby="nameHelp" formControlName="name">
+              <div
+                *ngIf="recipeForm.get('name').invalid && (recipeForm.get('name').dirty || recipeForm.get('name').touched)"
+                class="alert alert-danger mt-2">
+                <div *ngIf="recipeForm.get('name').errors.required">
+                  Name is required.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3 col-6">
+              <label for="description" class="form-label fw-bold">Description</label>
+              <input type="text" class="form-control" id="description" formControlName="description">
+              <div
+                *ngIf="recipeForm.get('description').invalid && (recipeForm.get('description').dirty || recipeForm.get('description').touched)"
+                class="alert alert-danger mt-2">
+                <div *ngIf="recipeForm.get('description').errors.required">
+                  Description is required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="version" class="form-label fw-bold">Version</label>
+            <input type="text" class="form-control" id="version" formControlName="version">
+            <div
+              *ngIf="recipeForm.get('version').invalid && (recipeForm.get('version').dirty || recipeForm.get('version').touched)"
+              class="alert alert-danger mt-2">
+              <div *ngIf="recipeForm.get('version').errors.required">
+                Version is required.
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="image" class="form-label fw-bold">Image</label>
+            <input type="text" class="form-control" id="image" formControlName="image">
+          </div>
+          <div class="mb-3 col-xxl-1 col-md-2 col-sm-3">
+            <label for="enabled" class="form-label fw-bold">Status</label>
+            <select class="form-select" [(ngModel)]='ngSelect' aria-label="enabled" formControlName="enabled">
+              <option value=false>Disable</option>
+              <option value=true >Enable</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-sm btn-white" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+      <ng-container *ngIf="!isHandling; else notHandle">
+        <button type="submit" class="btn btn-sm btn-warning" (click)="handleSubmit()">
+          Save
+        </button>
+      </ng-container>
+      <ng-template #notHandle>
+        <button disabled type="button" class="btn btn-sm btn-warning btn-loader">
+          <span class="loader"></span>
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>
